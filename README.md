@@ -31,13 +31,13 @@ public class AnalysisEngine {
     this.scriptEngine = scriptEngine;
   }
   
-  public SEXP runScript(String script) throws IOException, ScriptException {
-    return (SEXP)scriptEngine.eval(sourceFile);
+  public SEXP runScript(String script) throws ScriptException {
+    return (SEXP)scriptEngine.eval(script);
   }
 }
 ```
 
-For more examples see https://github.com/perNyfelt/renjin-spring-boot-starter-examples
- 
+For more comprehensive examples see https://github.com/perNyfelt/renjin-spring-boot-starter-examples
+
 # Configuration
 TODO: add config params and descriptions here
