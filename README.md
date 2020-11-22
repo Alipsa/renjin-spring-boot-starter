@@ -36,8 +36,50 @@ public class AnalysisEngine {
   }
 }
 ```
+Since any executions in the same session share data (e.g. variables in the global environment),
+in some cases you need to have a new Session for every script invocation. 
+As session creation is a bit expensive, there is an Object pool of Script Engines 
+with a unique session for each that you can use as follows:
+
+```java
+import org.renjin.script.RenjinScriptEngine;
+import org.renjin.sexp.SEXP;
+import org.springframework.beans.factory.annotation.Autowired;;
+import org.springframework.stereotype.Service;
+import se.alipsa.renjin.starter.RenjinSessionEnginePool;
+import java.util.Map;
+
+@Service
+public class ReportEngine {
+  private final RenjinSessionEnginePool renjinSessionEnginePool;
+
+  @Autowired
+  public ReportEngine(RenjinSessionEnginePool renjinSessionEnginePool) {
+    this.renjinSessionEnginePool = renjinSessionEnginePool;
+  }
+
+  private SEXP runScript(String script, Map<String, Object> params) throws Exception {
+    RenjinScriptEngine scriptEngine = null;
+    try {
+      scriptEngine = renjinSessionEnginePool.borrowObject();
+      params.forEach(scriptEngine::put);
+      return (SEXP) scriptEngine.eval(script);
+    } finally {
+      if (scriptEngine != null) {
+        renjinSessionEnginePool.returnObject(scriptEngine);
+      }
+    }
+  }
+}
+```
+Note: When the engine is returned to the pool, all top level variables are removed with
+`rm(list = ls(all.names = TRUE))` so that the next script will start with a clean 
+environment.
+
 
 For more comprehensive examples see https://github.com/perNyfelt/renjin-spring-boot-starter-examples
 
 # Configuration
-TODO: add config params and descriptions here
+Default value in bold
+* se.alipsa.renjin.starter.excludeDefaultPackages=true / __false__
+* se.alipsa.renjin.starter.packageLoader=AetherPackageLoader / __ClasspathPackageLoader__
