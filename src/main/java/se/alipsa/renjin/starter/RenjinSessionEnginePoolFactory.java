@@ -10,8 +10,6 @@ import org.renjin.primitives.packaging.ClasspathPackageLoader;
 import org.renjin.primitives.packaging.PackageLoader;
 import org.renjin.script.RenjinScriptEngine;
 import org.renjin.script.RenjinScriptEngineFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.script.ScriptException;
 
