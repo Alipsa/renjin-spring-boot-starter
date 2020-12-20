@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>se.alipsa</groupId>
     <artifactId>renjin-spring-boot-starter</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <name>Renjin Spring Boot STarter</name>
     <description>Spring Boot Starter for integrating Renjin with your Spring Boot Application</description>
