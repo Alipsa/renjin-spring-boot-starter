@@ -12,6 +12,26 @@ To use it, add the following dependency to your pom.xml
 
 Then, in your spring boot application, you can wire in the ScriptEngine
 to execute R code. E.g. (very simplified)
+
+Import the RenjinStarterAutoConfig in one of your configuration beans:
+```java
+package my.springapp;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import se.alipsa.renjin.starter.RenjinStarterAutoConfig;
+
+@Configuration
+@Import(RenjinStarterAutoConfig.class)
+public class BeanConfig {
+  // Your other beans gos here...
+}
+```
+
+Now you can just autowire a RenjinScriptEngine in your
+service(s), e.g:
+
 ```java
 package my.springapp;
 
@@ -83,3 +103,12 @@ For more comprehensive examples see https://github.com/perNyfelt/renjin-spring-b
 Default value in bold
 * se.alipsa.renjin.starter.excludeDefaultPackages=true / __false__
 * se.alipsa.renjin.starter.packageLoader=AetherPackageLoader / __ClasspathPackageLoader__
+
+# Release History
+
+### v1.0.1 in progress
+- Set compile version to java 11 (was 1.8)
+- Upgrade dependencies for commons pool, slf4j, junit
+- Add spotbugs annotations to exclude some false positives
+
+### v 1.0.0, 2020-12-20

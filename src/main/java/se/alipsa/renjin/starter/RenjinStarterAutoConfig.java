@@ -1,5 +1,6 @@
 package se.alipsa.renjin.starter;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.renjin.aether.AetherPackageLoader;
 import org.renjin.eval.Session;
 import org.renjin.eval.SessionBuilder;
@@ -21,6 +22,7 @@ public class RenjinStarterAutoConfig {
 
   private final RenjinStarterProperties renjinStarterProperties;
 
+  @SuppressFBWarnings("EI_EXPOSE_REP2")
   @Autowired
   public RenjinStarterAutoConfig(RenjinStarterProperties props) {
     renjinStarterProperties = props;

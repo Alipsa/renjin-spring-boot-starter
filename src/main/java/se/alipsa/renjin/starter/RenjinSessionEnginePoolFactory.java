@@ -1,5 +1,6 @@
 package se.alipsa.renjin.starter;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.pool2.BasePooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
@@ -20,6 +21,7 @@ public class RenjinSessionEnginePoolFactory extends BasePooledObjectFactory<Renj
   private final RenjinScriptEngineFactory renjinScriptEngineFactory;
   private final ClassLoader renjinClassLoader;
 
+  @SuppressFBWarnings("EI_EXPOSE_REP2")
   public RenjinSessionEnginePoolFactory(RenjinStarterProperties renjinStarterProperties,
                                         RenjinScriptEngineFactory renjinScriptEngineFactory,
                                         ClassLoader renjinClassLoader) {
