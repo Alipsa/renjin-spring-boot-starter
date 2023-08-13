@@ -25,7 +25,7 @@ import se.alipsa.renjin.starter.RenjinStarterAutoConfig;
 @Configuration
 @Import(RenjinStarterAutoConfig.class)
 public class BeanConfig {
-  // Your other beans gos here...
+  // Your other beans goes here...
 }
 ```
 
